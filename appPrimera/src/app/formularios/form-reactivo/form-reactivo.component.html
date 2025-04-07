@@ -1,0 +1,111 @@
+<p>form-reactivo works!</p>
+
+<div class="container">
+    <div class="row">
+
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label class="form-label">
+                    First Name:
+                </label>
+                <input class="form-control" type="text" formControlName="name" required>
+                
+
+                <div class="alert alert-danger" [hidden]="name.valid || name.pristine">
+
+                    <div *ngIf="name.errors?.required">
+                        Name is required.
+                    </div>
+
+                    <div *ngIf="name.errors?.minlength">
+                        Name must be at least 4 characters long.
+                    </div>
+                    <div *ngIf="name.errors?.forbiddenName">
+                        Name cannot be Bob.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    Last Name:
+                </label>
+                <input class="form-control" type="text" formControlName="lastName" required>
+
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    Alter Ego:
+                </label>
+                <input class="form-control" type="text" formControlName="altergo" required>
+
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    Power:
+                </label>
+                <select class="form-control" formControlName="power" required>
+                    <option value="">-seleccione-</option>
+                    <option [value]="power" *ngFor="let power of powers">{{power}}</option>
+                </select>
+
+            </div>
+
+            <div formGroupName="address">
+                <h3>Address</h3>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Street:
+                    </label>
+                    <input class="form-control" nput type="text" formControlName="street">
+
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        City:
+                    </label>
+                    <input class="form-control" nput type="text" formControlName="city">
+
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        State:
+                    </label>
+                    <input class="form-control" nput type="text" formControlName="state">
+
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Zip Code:
+                    </label>
+                    <input class="form-control" nput type="text" formControlName="zip">
+
+                </div>
+            </div>
+
+            <p>
+                Form Status: {{ profileForm.value | json }}
+            </p>
+
+            <p>
+                Form Status: {{ profileForm.status }}
+            </p>
+
+            <button (click)="updateProfile()" class="btn btn-primary mb-2" [disabled]="profileForm.invalid">Update
+                Profile</button>
+            <br>
+            <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Submit</button>
+        </form>
+
+    </div>
+</div>

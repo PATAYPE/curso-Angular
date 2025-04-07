@@ -1,0 +1,45 @@
+<p>registro works!</p>
+
+<form >
+<p>Nombre: <input type="text" [(ngModel)]="nombre"> </p>
+<p>Apellido: <input type="text" [(ngModel)]="apellido" > </p>
+<input type="button" name="" value="registrar" (click)="registrar()">
+
+
+<button type="button" [disabled]="isHabilitado" (click)="ejecutarBoton()" > Save </button>
+<input type="button" [disabled]="isHabilitado" (click)="ejecutarBoton()" value="Save"> 
+
+
+<div class="alert alert-danger col-md-3 text-center mt-4" *ngIf="isRegistrado;else esRegistrado">
+    empleado no registrado
+</div>
+
+
+<ng-template #esRegistrado>
+    <div class="alert alert-primary col-md-3 text-center mt-4">
+        ¡Empleado registrado correctamente!
+    </div>
+</ng-template>
+
+<div class="alert alert-succes" role="alert">
+  <ul>
+    <li *ngFor="let empleado of empleados; let i = index">
+        <p> {{i+1}}- {{empleado.nombre}} - {{empleado.apellido}}</p>
+    </li>
+  </ul>
+</div>
+
+</form>
+
+
+<div class=" alert alert-dark mt-4">
+  <p [class]="miParrafo"> esto es una prueba de ngClass</p> 
+</div>
+
+<div class=" alert alert-dark mt-4">
+<p [ngClass]="edad>18?'pMayor':'pMenor'">Es mayor de edad</p>
+</div>
+
+<div class="alert alert-dark mt-4">
+  <p [class.pMiClasePrueba]="flagMiClase">Utilizando [class]</p>
+</div>

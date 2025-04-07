@@ -1,0 +1,15 @@
+<p>curso-add works!</p>
+
+<form [formGroup]="formCurso">
+    <div class="label-form">curso:</div>
+
+    <input type="hidden" formControlName="id" >
+    <input type="text" class="form-control" formControlName="nombre">
+    <button class="btn btn-primary" (click)="operar()">Registrar</button>
+
+    {{ formCurso.values | json}}
+</form>
+
+<app-curso-list (cursoEmitter)="cargarFormulario($event)"></app-curso-list>
+
+

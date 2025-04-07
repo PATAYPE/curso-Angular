@@ -1,0 +1,15 @@
+<p>curso-list works!</p>
+
+<table class="table table-hover">
+    <tr>
+        <td>ID</td>
+        <td>NOMBRE</td>
+        <td colspan="2" class="text-center">ACCIONES</td>
+    </tr>
+    <tr *ngFor="let cu of cursos; let id = index ">
+        <td>{{cu.id}}</td>
+        <td>{{cu.nombre}}</td>
+        <td> <button type="button" class="btn btn-primary bg-primary"(click)="irModificarCurso(cu)">Modificar</button></td>
+        <td> <button type="button" class="btn btn-danger bg-danger" (click)="eliminarCurso(cu)">Eliminar</button></td>
+    </tr>
+</table>

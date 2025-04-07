@@ -1,0 +1,19 @@
+<p>formulario-basico works!</p>
+
+<input type="text" placeholder="Ingrese tu nombre" class="form-control" #name>
+
+<!-- el atributo #name es tambien variable de plantilla -->
+
+<button class="btn btn-primary" (click)="mostrarConsola(name.value)" >Mostrar en consola</button>
+
+
+<div class="alert alert-primary"  *ngIf="isRegistrado;else noRegistrado">
+    Se envio el mensaje
+    <button class="btn btn-danger" (click)="isRegistrado=false" >X</button>
+</div>
+
+<ng-template #noRegistrado>
+    <div class="alert alert-danger">
+        Mensaje de Prueba
+    </div>
+</ng-template>

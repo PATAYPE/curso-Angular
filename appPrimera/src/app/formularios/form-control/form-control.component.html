@@ -1,0 +1,78 @@
+<!-- <div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Formulario Reactivo / Form Control</h5>
+                <form >
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" [formControl]="nombre" required  placeholder="Ingrese un nombre">
+
+                        <div class="alert alert-danger" [hidden]="nombre.valid || nombre.pristine ">
+                            <span *ngIf="nombre.errors?.required"> Ingrese un nombre</span>
+                            <span *ngIf="nombre.errors?.minlength"> Llongitud de nombre mayor a 2</span>
+                        </div>
+                       
+                        <br>
+                       
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lblcorreo" class="form-label">Correo:</label>
+                        <input type="text" class="form-control" id="lblcorreo" [formControl]="correo" required
+                            placeholder="Ingrese un email">
+
+                        <div class="alert alert-danger" [hidden]="correo.valid || correo.pristine ">
+                            Ingrese un email
+                        </div>
+
+                        {{correo.valid }} - {{ correo.pristine}}
+                    </div>
+                    <button class="btn btn-primary mt-2" (click)="updateName()" [disabled]="false">Update Name</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Formulario Reactivo / Form Group</h5>
+
+
+                <form [formGroup]="formContacto" (ngSubmit)="onSubmit()">
+
+                    <div class="form-group">
+                        <label for="first-name" class="form-label">First Name: </label>
+                        <input id="first-name" type="text" formControlName="firstName"  class="form-control" required>
+                        
+                        <div class="alert-danger alert" [hidden]="getName.valid || getName.pristine " >
+                            Ingrese  un nombre
+                        </div>
+                       
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Last Name: </label>
+                        <input id="lastName" type="text" formControlName="email" class="form-control" required>
+                        <div class="alert alert-danger" [hidden]=" getEmail.valid || getEmail.pristine ">
+
+                            <span *ngIf="getEmail.errors?.required">Ingrese un correo</span>
+
+                            <span *ngIf="getEmail.errors?.email">Ingrese un correo valido</span>
+                        </div>
+                    </div>
+                    {{ formContacto.get('firstName')?.value | json}}
+
+                    <p>Complete the form to enable button.</p>
+                    <button class="btn btn-primary" type="submit" [disabled]="formContacto.invalid">Submit</button>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

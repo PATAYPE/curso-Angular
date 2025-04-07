@@ -1,0 +1,7 @@
+<app-empleados [(messageChild)]="mensajeAHijo" ></app-empleados>
+<div class="container">
+    <input type="text" name="txtMensaje" #txtMensaje [(ngModel)]="mensajeAHijo">
+    <button (click)="enviarMensajeAHijo(txtMensaje.value)">Enviar</button>
+<div>
+
+    

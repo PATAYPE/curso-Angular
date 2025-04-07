@@ -1,0 +1,13 @@
+<h5 style="text-align: center; font-size: bold;">  
+    Empleados de la empresa!
+</h5>
+<!-- <div class="alert alert-succes" role="alert">
+    <ul>
+        <li *ngFor="let empleado of empleadosHijos; let i = index">
+            <p> {{i+1}}- {{empleado.nombre}} - {{empleado.apellido}}</p>
+        </li>
+    </ul>
+</div> -->
+
+<p>Aqui recibe el mensaje de Padre: <input type="text" [(ngModel)]="messageChild" name="mensajePadre"  #mensajePadre>  </p>
+<button (click)="enviarMessageToParent()" >Enviar a Padre</button>

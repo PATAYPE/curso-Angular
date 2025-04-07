@@ -1,0 +1,16 @@
+<p>calculadora works!</p>
+
+<p> Numero: 1 <input type="text" [(ngModel)]="num1" > </p>
+<p> Numero: 2 <input type="text" [(ngModel)]="num2" > </p>
+
+<p>
+    Operacion 
+    <select name="operacion" (change)="operacion($event)">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+</p>
+
+<p> Resultado: {{resultado}} </p>

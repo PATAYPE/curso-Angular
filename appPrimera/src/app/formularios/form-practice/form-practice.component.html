@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Formulario Reactivo / FormBuilder</h5>
+                    <p class="card-text"></p>
+                    <form [formGroup]="formHero">
+                        <div class="form-group">
+                            <label for="" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" formControlName="name" required>
+                        </div>
+                        <button class="btn btn-primary mt-3" [disabled]="!formHero.valid">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Formulario Reactivo / Form Group Form Control</h5>
+                    <p class="card-text"></p>
+
+                    <form [formGroup]="heroFormGroup">
+
+                        <div class="form-group">
+                            <label for="" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" formControlName="name" required>
+                        </div>
+
+                        <button class="btn btn-primary mt-3" [disabled]="!heroFormGroup.valid">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Formulario Reactivo / Form Control Básico</h5>
+                    <p class="card-text"></p>
+
+                    <form >
+
+                        <div class="form-group">
+                            <label for="" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" [formControl]="nombre">
+                        </div>
+
+                        {{nombre.value}} <br>
+
+                        <button class="btn btn-primary mt-3" >Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
