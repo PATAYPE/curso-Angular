@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row m-5 ">
+
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Lista de Alumnos</mat-card-title>
+                <mat-card-subtitle>Registrados</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="mat-elevation-z8">
+
+                    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="nombre">
+                          <mat-header-cell *matHeaderCellDef> nombre </mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+                        </ng-container>
+                      
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="apellido">
+                          <mat-header-cell *matHeaderCellDef> apellido </mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.apellido}} </mat-cell>
+                        </ng-container>
+                      
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="ciclo">
+                          <mat-header-cell *matHeaderCellDef> ciclo </mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.ciclo}} </mat-cell>
+                        </ng-container>
+                      
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="accion">
+                          <mat-header-cell *matHeaderCellDef class="table-cel">  accion </mat-header-cell>
+                          <mat-cell *matCellDef="let element" class="table-cel"> 
+                            
+                            <button class="m-2" mat-raised-button color="primary" routerLink="editar/{{element.id}}">editar</button>
+                            
+                            <button mat-raised-button color="warn"  routerLinkActive="router-link-active"  (click)="irEliminar(element)">eliminar</button>
+
+                          </mat-cell>
+                        </ng-container>
+                      
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      </mat-table>
+                      <mat-paginator [length]="11"
+                                [pageSize]="5"
+                                [pageSizeOptions]="[5, 10, 25, 100]"
+                                showFirstLastButtons>
+                    </mat-paginator>
+                   
+                </div>
+            </mat-card-content>
+        </mat-card> 
+
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<ul>
+   
+    <li *ngFor="let item of egresos; let i = index; ">
+
+        <p> {{item.nombre}} - {{item.monto}} - {{ ( item.monto / getTotalEgresos() )*100 | number : '1.1-2'}} %
+
+            <span> <button class="btn btn-primary" (click)="eliminarArticulo(item)"> X </button> </span>
+        </p>
+
+    </li>
+    
+</ul>

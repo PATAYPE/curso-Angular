@@ -1,0 +1,23 @@
+<p>persona </p>
+
+<p>
+    Nombre: {{ nombre}}
+    Apellido: {{apellido}}
+    Edad: {{ edad}}
+</p>
+
+<input type="text" #entrada [(ngModel)]="titulo" > {{ entrada.value}}
+
+<br>
+<button class="btn btn-primary mt-2" [disabled]="isHabilitado" (click)="agregarPersona()"> Agregar Persona </button>
+<br>
+
+<div *ngIf="isHabilitadoMensaje ; else elseTemplate" >
+    {{ mensaje }} copn el nombre de {{ titulo}}
+</div>
+<ng-template #elseTemplate>
+    <p>Se agrego una persona con el nombre {{titulo}} </p>
+</ng-template>
+
+
+

@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1> {{titulo }} </h1>
+
+            <hr>
+
+            <app-add-persona ></app-add-persona>
+            
+            <hr>
+
+            <app-list-persona 
+                *ngFor="let personaElemento of personas; let i = index"
+                [persona] = "personaElemento"
+                [indice] = "i"
+            >
+            </app-list-persona>
+            
+
+        </div>
+    </div>
+</div>
