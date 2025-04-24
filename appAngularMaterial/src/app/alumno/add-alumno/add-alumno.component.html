@@ -1,3 +1,41 @@
-<p>add-alumno works!</p>
+<div class="container">
+    <div class="row">
 
-<button (click)="goBack()">go back</button>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Alumno</mat-card-title>
+                <mat-card-subtitle>Nuevo Registro</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <input type="hidden" name="id" [(ngModel)]="id" disabled>
+
+                <div class="form-group">
+                    <label for="nombre" class="form-label"> Nombre </label>
+                    <input type="text" class="form-control" [(ngModel)]="nombre" id="nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" [(ngModel)]="apellido" id="apellido">
+                </div>
+
+                <div class="form-group">
+                    <label for="ciclo" class="form-label">Ciclo</label>
+                    <input type="text" class="form-control" [(ngModel)]="ciclo" id="ciclo">
+                </div>
+
+                <div class="col-md-2">
+                    <button class="mt-2" mat-raised-button color="primary" (click)="realizarAccion()">{{accion}}</button>
+                </div>
+
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button mat-raised-button color="accent" (click)="goBack()" title="Regresar"> << </button>
+            </mat-card-actions>
+
+        </mat-card>
+
+    </div>
+</div>

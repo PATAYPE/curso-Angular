@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Alumno } from 'src/app/models/alumno';
+import { AlumnoService } from 'src/app/service/alumno.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AddAlumnoModalComponent } from '../add-alumno-modal/add-alumno-modal.component';
 
 @Component({
   selector: 'app-list-alumno',
@@ -10,7 +13,7 @@ import { Alumno } from 'src/app/models/alumno';
 })
 export class ListAlumnoComponent implements OnInit {
 
-  ELEMENT_DATA: Alumno[] = [
+  /* ELEMENT_DATA: Alumno[] = [
       new Alumno( 1,  'Luis Raul', 'Romero Reyes', 10),
       new Alumno( 2,  'Alan Omar', 'Hilario Huitron', 6),
       new Alumno( 3,  'Jose Raul', 'Cruz Ojeda', 4),
@@ -22,19 +25,50 @@ export class ListAlumnoComponent implements OnInit {
       new Alumno( 9,  'Luis Miguel', 'Sanchez Sangay', 10),
       new Alumno( 10,  'Nestor', 'Canales Gamboa', 10),
       new Alumno( 11,  'Peter', 'Espinoza Gomez', 9)
-    ];
+    ]; */
 
+  
   displayedColumns: string[] = ['nombre', 'apellido', 'ciclo', 'accion'];
   dataSource = new MatTableDataSource<Alumno>();
 
+  totalRegistros = 11;
+  totalPorPagina = 5;
+  paginaActual = 0;
+  pageSize:number [] = [5, 10, 25, 100];
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-
-  constructor() { }
+  
+  constructor(
+    public dialog: MatDialog,
+    private alumnoService : AlumnoService) { 
+  }
 
   ngOnInit(): void {
-    this.dataSource.data = this.ELEMENT_DATA;
-    this.dataSource.paginator= this.paginator;
+    this.listAlumnos();
+
+    this.totalRegistros = 11;
+    this.totalPorPagina = 5;
+    this.paginaActual = 0;
+    this.pageSize = [5, 10, 25, 100];
+  }
+
+
+  listAlumnos():void {
+    
+    this.alumnoService.listAll().subscribe(
+      data => {
+        
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+
+        /*this.dataSource.paginator.length= this.totalRegistros;
+        this.dataSource.paginator.pageSize = this.totalPorPagina;
+        this.dataSource.paginator.pageSizeOptions = this.pageSize;
+        */
+      },
+      err => console.log(err)
+      // () => console.log('yayy')
+    );
   }
 
 
@@ -42,8 +76,47 @@ export class ListAlumnoComponent implements OnInit {
     alert('el alumno :' + alumno.nombre + ' sera editar');
   }
 
+  
   irEliminar(alumno: Alumno){
-    alert('el alumno: '+ alumno.nombre+ ' sera eliminado');
+    this.alumnoService.delete(alumno);
+    this.listAlumnos();
   }
 
+  name='';
+  animal='';
+
+
+  alumnoModal : Alumno;
+
+  openDialog():void{
+
+    const alumnoNuevo =  new Alumno(0,'','', 0 );
+
+    const dialogRef = this.dialog.open(AddAlumnoModalComponent, {
+      width: '450px',
+      data: { alumno: alumnoNuevo }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+  }
+
+  operar(alumno : Alumno){
+
+
+    const dialogRef = this.dialog.open(AddAlumnoModalComponent, {
+      width: '450px',
+      data: alumno 
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log( result );
+      //console.log('The dialog was closed');
+      //this.animal = result;
+      this.listAlumnos();
+    });
+
+  }
 }

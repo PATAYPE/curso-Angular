@@ -10,7 +10,7 @@ const routes: Routes = [
     component : ListAlumnoComponent
   },
   {
-    path: 'nuevo',
+    path: 'nuevo/:id',
     component: AddAlumnoComponent
   },{
     path: 'editar/:id',

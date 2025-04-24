@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Hi {{data.nombre}}</h1>
+<div mat-dialog-content>
+
+  <div class="container">
+    <div class="row">
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Registro Alumno</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          
+          <mat-form-field class="example-full-width"> 
+            <input matInput type="text"  [(ngModel)]="idAlumno" name="id" id="id">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width"> 
+              <mat-label> Nombre : </mat-label>
+              <input matInput type="text" class="form-control" [(ngModel)]="nombre" id="nombre">
+          </mat-form-field>
+        
+
+          <mat-form-field class="example-full-width"> 
+            <mat-label> Apellido : </mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="apellido" id="apellido">
+          </mat-form-field> 
+         
+          <mat-form-field class="example-full-width"> 
+            <mat-label> Ciclo : </mat-label>
+            <input matInput type="number" class="form-control" [(ngModel)]="ciclo" id="ciclo">
+          </mat-form-field>
+          
+          <div class="col-md-2">
+            <button class="mt-2" mat-raised-button color="primary" (click)="enviar()">Registrar</button>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+
+    </div>
+  </div>
+
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

@@ -8,6 +8,20 @@
             </mat-card-header>
 
             <mat-card-content>
+              
+              <div class="m-2">
+                <div class="row m-12">
+                  <div class="col-md-2"  >
+                    <button mat-raised-button color="accent" routerLink="nuevo/0" >
+                      Nuevo
+                    </button>
+                  </div>
+                  <div class="col-md-2 offset-md-2">
+                    <button mat-raised-button color="accent" (click)="openDialog()"> + Agregar Alumno </button>
+                  </div>
+                </div>
+              </div>
+
                 <div class="mat-elevation-z8">
 
                     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -33,20 +47,21 @@
                         <ng-container matColumnDef="accion">
                           <mat-header-cell *matHeaderCellDef class="table-cel">  accion </mat-header-cell>
                           <mat-cell *matCellDef="let element" class="table-cel"> 
+                            <button class="m-2" mat-raised-button color="primary" routerLink="editar/{{element.id}}">editar</button> 
                             
-                            <button class="m-2" mat-raised-button color="primary" routerLink="editar/{{element.id}}">editar</button>
-                            
-                            <button mat-raised-button color="warn"  routerLinkActive="router-link-active"  (click)="irEliminar(element)">eliminar</button>
+                            <button class="m-2" mat-raised-button color="primary" (click)="operar(element)" >editar</button>
 
+                            <button mat-raised-button color="warn"  routerLinkActive="router-link-active"  (click)="irEliminar(element)">eliminar</button>
                           </mat-cell>
                         </ng-container>
                       
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                       </mat-table>
-                      <mat-paginator [length]="11"
-                                [pageSize]="5"
-                                [pageSizeOptions]="[5, 10, 25, 100]"
+                      <mat-paginator [length]="totalRegistros"
+                                [pageSize]="totalPorPagina"
+                                
+                                [pageSizeOptions]="pageSize"
                                 showFirstLastButtons>
                     </mat-paginator>
                    
