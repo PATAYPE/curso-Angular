@@ -37,9 +37,10 @@ export class AlumnoService {
     return this.http.get<Alumno[]>(this.alumnosUrl);
   }
 
-  save(alumno: Alumno){
-    this.ELEMENT_DATA.push(alumno);
-    console.log(this.ELEMENT_DATA);
+  save(alumno: Alumno) : Observable<any>{
+    /*this.ELEMENT_DATA.push(alumno);
+    console.log(this.ELEMENT_DATA);*/
+    return this.http.post<Alumno>(this.alumnosUrl, alumno, this.httpOptions).pipe( map( resp => (  { resp, mensaje:"ok"}) ));
   }
 
 
@@ -48,8 +49,12 @@ export class AlumnoService {
   }
 
 
-  getByd(id: number): Alumno{
-    return this.ELEMENT_DATA.find( el => { return el.id == id} );
+  getByd(id: number): Observable<any>{
+    //return  this.ELEMENT_DATA.find( el => { return el.id == id} );
+    const uri = `${this.alumnosUrl}/${id}`;
+    return this.http.get<Alumno>(uri);/*.pipe(
+      map(resp => resp )
+    );*/
   }
 
 
@@ -58,26 +63,16 @@ export class AlumnoService {
   }
 
 
-  
-
-
-  delete(alumno: Alumno){
-    let indice = this.getIndexByAlumno(alumno);
-    this.ELEMENT_DATA.splice(indice, 1);
+  delete(alumno: Alumno):Observable<any>{
+    let uri = `${this.alumnosUrl}/${alumno.id}`;
+    return this.http.delete<Alumno>(uri, this.httpOptions).pipe( map( resp => { resp; console.log(resp); } ));
   }
 
 
   update(alumno:Alumno): Observable<Alumno>{
-   
-    let index = this.getIndexByAlumno(alumno);
-    let alumnoDB = this.ELEMENT_DATA[index];
-    alumnoDB.nombre = alumno.nombre;
-    alumnoDB.apellido = alumno.apellido;
-    alumnoDB.ciclo = alumno.ciclo;
-
-    return this.http.put(this.alumnosUrl, alumno, this.httpOptions).pipe(
-      map( respuesta => alumno)
-    );
+    return this.http.put<Alumno>(this.alumnosUrl, alumno, this.httpOptions);/*.pipe(
+      map( respuesta => respuesta)
+    );*/
   }
 
 }

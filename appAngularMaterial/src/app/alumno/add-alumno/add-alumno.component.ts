@@ -46,11 +46,19 @@ export class AddAlumnoComponent implements OnInit {
   }
 
   iniciarFormulario(idAlumno:number){
-    let alumno = this.alumnoService.getByd(idAlumno);
-    this.id= idAlumno;
+    this.alumnoService.getByd(idAlumno).subscribe( 
+      resp => 
+        {
+          this.id= resp.id;
+          this.nombre= resp.nombre;
+          this.apellido= resp.apellido;
+          this.ciclo= resp.ciclo
+        });
+
+    /* this.id= idAlumno;
     this.nombre= alumno.nombre;
     this.apellido= alumno.apellido;
-    this.ciclo = alumno.ciclo.toString();
+    this.ciclo = alumno.ciclo.toString(); */
   }
 
   realizarAccion(){
@@ -64,14 +72,14 @@ export class AddAlumnoComponent implements OnInit {
   registrar(){
     let idAlumno = this.alumnoService.getListSize();
     let alumno = new Alumno( idAlumno, this.nombre, this.apellido, Number(this.ciclo) );
-    this.alumnoService.save(alumno);
+    this.alumnoService.save(alumno).subscribe(resp => {
+      console.log(resp);
+    });
   }
 
   modificar(){
-    debugger;
     let alumno = new Alumno( this.id, this.nombre, this.apellido, Number(this.ciclo) );
     this.alumnoService.update(alumno).subscribe( resp => {
-      debugger;
       console.log(resp);
     })
   }

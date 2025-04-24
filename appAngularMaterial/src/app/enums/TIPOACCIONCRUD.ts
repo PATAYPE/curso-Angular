@@ -1,0 +1,8 @@
+export enum TIPOACCTONCRUD {
+
+    CREAR=1,
+    MODIFICAR=2,
+    CONSULTAR=3,
+    ELIMINAR=4,
+
+}

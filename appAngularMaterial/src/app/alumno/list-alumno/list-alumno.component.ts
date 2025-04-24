@@ -5,6 +5,8 @@ import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/service/alumno.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AddAlumnoModalComponent } from '../add-alumno-modal/add-alumno-modal.component';
+import { ParametroDialogo } from 'src/app/models/parametro-dialogo';
+import { TIPOACCTONCRUD } from 'src/app/enums/TIPOACCIONCRUD';
 
 @Component({
   selector: 'app-list-alumno',
@@ -78,16 +80,13 @@ export class ListAlumnoComponent implements OnInit {
 
   
   irEliminar(alumno: Alumno){
-    this.alumnoService.delete(alumno);
+    this.alumnoService.delete(alumno).subscribe( resp => {
+      console.log(resp);
+    });
     this.listAlumnos();
   }
 
-  name='';
-  animal='';
-
-
-  alumnoModal : Alumno;
-
+  
   openDialog():void{
 
     const alumnoNuevo =  new Alumno(0,'','', 0 );
@@ -105,14 +104,27 @@ export class ListAlumnoComponent implements OnInit {
 
   operar(alumno : Alumno){
 
+    let parametroDialogo = new ParametroDialogo<Alumno,Alumno>();
+    
 
+    let alumnoModal;
+    if(alumno!=null ){
+      
+      parametroDialogo.objecto = alumno;
+      parametroDialogo.accion = TIPOACCTONCRUD.MODIFICAR;
+    }else{
+
+      parametroDialogo.objecto = new Alumno(0,'','',0);
+      parametroDialogo.accion = TIPOACCTONCRUD.CREAR;
+    }
+  
     const dialogRef = this.dialog.open(AddAlumnoModalComponent, {
       width: '450px',
-      data: alumno 
+      data: parametroDialogo 
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      //console.log( result );
+      console.log( result );
       //console.log('The dialog was closed');
       //this.animal = result;
       this.listAlumnos();
